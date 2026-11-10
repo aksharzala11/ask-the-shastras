@@ -2837,10 +2837,9 @@ if (!saveMatch) {
   }
   document.addEventListener("keydown", function(e){
     if (e.key === "Escape") { buf = ""; if (state === "card") goIdle(); return; }
-    if (e.key === "Enter") { if (buf) { e.preventDefault(); flush(); } return; }
+    if (e.key === "Enter") { if (buf) flush(); return; }
     if (e.key && e.key.length === 1 && /[0-9a-z]/i.test(e.key)) {
-      e.preventDefault();
-      buf += e.key;
+      buf += e.key;      /* no preventDefault: blocking keys makes Chrome re-show "Press Esc to exit full screen" */
       clearTimeout(bufTimer);
       bufTimer = setTimeout(flush, 250);
     }
